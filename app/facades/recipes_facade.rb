@@ -8,8 +8,10 @@ class RecipesFacade
   def search
     if @country
       recipe_search(@country)
-    else
+    elsif
       random_country_recipes
+      random_country = @country[:name][:common]
+      recipe_search(random_country)
     end
   end
 
@@ -24,10 +26,14 @@ class RecipesFacade
     end
   end
 
-  # def random_country_recipes
-  #   service.new.get_random_country
-    
-  # end
+  def random_country_recipes
+    @country = country_service.pick_random_country
+    # require 'pry'; binding.pry
+  end
+
+  def country_service
+    CountryService.new
+  end
 
   def edamam_service
     EdamamService.new
