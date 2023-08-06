@@ -28,7 +28,7 @@ class RecipesFacade
 
   def random_country_recipes
     @country = country_service.pick_random_country
-    # require 'pry'; binding.pry
+
   end
 
   def country_service
