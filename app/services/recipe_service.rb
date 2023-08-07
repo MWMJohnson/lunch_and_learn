@@ -1,4 +1,4 @@
-class EdamamService
+class RecipeService
 
   def initialize
 

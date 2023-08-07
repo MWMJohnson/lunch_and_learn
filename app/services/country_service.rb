@@ -5,6 +5,10 @@ class CountryService
     country = countries.sample
   end
 
+  def get_all_countries
+    get_url("v3.1/all")
+  end
+
 
   def get_url(url)
     response = conn.get(url)
@@ -14,5 +18,9 @@ class CountryService
   def conn
     Faraday.new(url: 'https://restcountries.com/')
   end
+
+  # def get_country(capital)
+  #   get_url("v3.1/all/#{capital}")
+  # end
 
 end
