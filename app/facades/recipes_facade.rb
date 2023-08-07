@@ -8,7 +8,7 @@ class RecipesFacade
   def search
     if @country
       recipe_search(@country)
-    elsif
+    else
       random_country_recipes
       random_country = @country[:name][:common]
       recipe_search(random_country)
