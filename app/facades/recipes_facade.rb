@@ -16,7 +16,7 @@ class RecipesFacade
   end
 
   def recipe_search(country)
-    make_recipes(edamam_service.get_recipes_by_country(country), country)
+    make_recipes(recipe_service.get_recipes_by_country(country), country)
   end
 
   def make_recipes(json, country)
@@ -28,15 +28,14 @@ class RecipesFacade
 
   def random_country_recipes
     @country = country_service.pick_random_country
-
   end
 
   def country_service
     CountryService.new
   end
 
-  def edamam_service
-    EdamamService.new
+  def recipe_service
+    RecipeService.new
   end
 end
 
