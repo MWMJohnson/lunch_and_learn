@@ -19,8 +19,8 @@ class CountryService
     Faraday.new(url: 'https://restcountries.com/')
   end
 
-  # def get_country(capital)
-  #   get_url("v3.1/all/#{capital}")
-  # end
+  def get_country_data(country)
+    get_url("v3.1/name/#{country}")
+  end
 
 end
