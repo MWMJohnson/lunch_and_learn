@@ -10,11 +10,13 @@ class RecipesFacade
       recipe_search(@country)
     else
       random_country_recipes
+      random_country = @country[:name][:common]
+      recipe_search(random_country)
     end
   end
 
   def recipe_search(country)
-    make_recipes(edamam_service.get_recipes_by_country(country), country)
+    make_recipes(recipe_service.get_recipes_by_country(country), country)
   end
 
   def make_recipes(json, country)
@@ -24,13 +26,16 @@ class RecipesFacade
     end
   end
 
-  # def random_country_recipes
-  #   service.new.get_random_country
-    
-  # end
+  def random_country_recipes
+    @country = country_service.pick_random_country
+  end
 
-  def edamam_service
-    EdamamService.new
+  def country_service
+    CountryService.new
+  end
+
+  def recipe_service
+    RecipeService.new
   end
 end
 
