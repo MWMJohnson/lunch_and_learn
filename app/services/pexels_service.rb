@@ -1,5 +1,5 @@
 class PexelsService
-  def images_by_country(search)
+  def images(search)
     get_url("search?query=#{search}")
   end
 

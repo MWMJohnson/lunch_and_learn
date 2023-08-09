@@ -11,7 +11,7 @@ RSpec.describe 'Favorites' do
           password_confirmation: 'treats4lyf'
                       }
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post '/api/v1/users', headers:, params: JSON.generate(user_params)
+        post api_v1_users_path, headers:, params: JSON.generate(user_params)
         user = User.last
 
         favorite_params = {
@@ -21,7 +21,7 @@ RSpec.describe 'Favorites' do
                             recipe_title: "Pandang Curry"
                           }
 
-        post '/api/v1/favorites', headers:, params: JSON.generate(favorite_params)
+        post api_v1_favorites_path, headers:, params: JSON.generate(favorite_params)
         
         user_favorite = User.last.favorites.last
         result = JSON.parse(response.body, symbolize_names: true)
@@ -52,7 +52,7 @@ RSpec.describe 'Favorites' do
           password_confirmation: 'treats4lyf'
                       }
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post '/api/v1/users', headers:, params: JSON.generate(user_params)
+        post api_v1_users_path, headers:, params: JSON.generate(user_params)
         user = User.last
 
         favorite_params = {
@@ -62,11 +62,12 @@ RSpec.describe 'Favorites' do
                             recipe_title: "Pandang Curry"
                           }
 
-        post '/api/v1/favorites', headers:, params: JSON.generate(favorite_params)
+        post api_v1_favorites_path, headers:, params: JSON.generate(favorite_params)
         
         user_favorite = User.last.favorites.last
         result = JSON.parse(response.body, symbolize_names: true)
 
+        expect(response).to_not be_successful
         expect(response.status).to eq(401)
         
         result = JSON.parse(response.body, symbolize_names: true)

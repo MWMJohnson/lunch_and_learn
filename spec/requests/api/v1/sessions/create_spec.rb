@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Login User' do
   describe 'POST api_v1_sessions_path' do 
-    describe 'happy path' do 
+    describe 'happy paths' do 
       it 'logins a user' do
         user_params = {
           name: 'Odell',
@@ -11,14 +11,14 @@ RSpec.describe 'Login User' do
           password_confirmation: 'treats4lyf'
         }
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post '/api/v1/users', headers:, params: JSON.generate(user_params)
+        post api_v1_users_path, headers:, params: JSON.generate(user_params)
 
         user_params = {
           email: 'goodboy@ruffruff.com',
           password: 'treats4lyf'
         }
 
-        post '/api/v1/sessions', headers:, params: JSON.generate(user_params)
+        post api_v1_sessions_path, headers:, params: JSON.generate(user_params)
 
         created_user = User.last
         result = JSON.parse(response.body, symbolize_names: true)
@@ -59,7 +59,7 @@ RSpec.describe 'Login User' do
       end
     end
 
-    describe 'sad path' do 
+    describe 'sad paths' do 
       it 'does not login a user when an email is missing or incorrect' do
         user_params = {
           name: 'Odell',
@@ -68,13 +68,16 @@ RSpec.describe 'Login User' do
           password_confirmation: 'treats4lyf'
         }
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post '/api/v1/users', headers:, params: JSON.generate(user_params)
+        post api_v1_users_path, headers:, params: JSON.generate(user_params)
 
         user_params = {
           email: ' ',
           password: 'treats4lyf'
         }
-        post '/api/v1/sessions', headers:, params: JSON.generate(user_params)
+        post api_v1_sessions_path, headers:, params: JSON.generate(user_params)
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(401)
 
         result = JSON.parse(response.body, symbolize_names: true)
 
@@ -93,13 +96,16 @@ RSpec.describe 'Login User' do
           password_confirmation: 'treats4lyf'
         }
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post '/api/v1/users', headers:, params: JSON.generate(user_params)
+        post api_v1_users_path, headers:, params: JSON.generate(user_params)
 
         user_params = {
           email: 'goodboy@ruffruff.com',
           password: ' '
         }
-        post '/api/v1/sessions', headers:, params: JSON.generate(user_params)
+        post api_v1_sessions_path, headers:, params: JSON.generate(user_params)
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(401)
 
         result = JSON.parse(response.body, symbolize_names: true)
 

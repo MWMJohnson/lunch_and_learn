@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe PexelsService do
-  describe "#images_by_country" do
+  describe "#images" do
     it "can get images based on a country search", :vcr do
       country = "thailand"
-      response = PexelsService.new.images_by_country(country)
+      response = PexelsService.new.images(country)
 
       expect(response).to have_key(:photos)
       expect(response[:photos]).to be_an Array

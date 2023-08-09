@@ -90,8 +90,8 @@ RSpec.describe Favorite do
     end
 
     describe "sad paths" do
-      it "returns an empty array if user does not exists" do
-        get api_v1_favorites_path(api_key: "XYZWERD")
+      it "rejects request if user does not exists" do
+        get api_v1_favorites_path(api_key: "111111111")
   
         expect(response).to_not be_successful
         expect(response.status).to eq(401)
