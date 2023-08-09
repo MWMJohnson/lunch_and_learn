@@ -10,7 +10,6 @@ RSpec.describe 'Register User' do
           password: 'treats4lyf',
           password_confirmation: 'treats4lyf'
         }
-        
         headers = { 'CONTENT_TYPE' => 'application/json' }
         post '/api/v1/users', headers:, params: JSON.generate(user_params)
         user = User.last
