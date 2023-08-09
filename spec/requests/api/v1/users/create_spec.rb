@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Register User' do
   describe 'POST api_v1_users_path' do 
-    describe 'happy path' do 
-      it 'registers a user', :vcr do
+    describe 'happy paths' do 
+      it 'registers a user' do
         user_params = {
           name: 'Odell',
           email: 'goodboy@ruffruff.com',
@@ -11,11 +11,13 @@ RSpec.describe 'Register User' do
           password_confirmation: 'treats4lyf'
         }
         headers = { 'CONTENT_TYPE' => 'application/json' }
-        post '/api/v1/users', headers:, params: JSON.generate(user_params)
+        post api_v1_users_path, headers:, params: JSON.generate(user_params)
         user = User.last
         result = JSON.parse(response.body, symbolize_names: true)
 
         expect(response).to be_successful
+        expect(response.status).to eq(201)
+
         
         expect(user.name).to eq(user_params[:name])
         expect(user.email).to eq(user_params[:email])
@@ -55,7 +57,7 @@ RSpec.describe 'Register User' do
       end
     end
 
-  describe "sad path"
+  describe "sad paths"
     it 'renders error if email is not unique' do
       user_params = {
         name: 'Odell',
@@ -65,8 +67,11 @@ RSpec.describe 'Register User' do
       }
       headers = { 'CONTENT_TYPE' => 'application/json' }
 
-      post '/api/v1/users', headers:, params: JSON.generate(user_params)
-      post '/api/v1/users', headers:, params: JSON.generate(user_params)
+      post api_v1_users_path, headers:, params: JSON.generate(user_params)
+      post api_v1_users_path, headers:, params: JSON.generate(user_params)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(422)
 
       result = JSON.parse(response.body, symbolize_names: true)
 
@@ -85,7 +90,10 @@ RSpec.describe 'Register User' do
         password_confirmation: ''
       }
       headers = { 'CONTENT_TYPE' => 'application/json' }
-      post '/api/v1/users', headers:, params: JSON.generate(user_params)
+      post api_v1_users_path, headers:, params: JSON.generate(user_params)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(422)
 
       result = JSON.parse(response.body, symbolize_names: true)
 
