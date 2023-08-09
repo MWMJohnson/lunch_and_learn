@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RecipeService do
   describe "#get_recipes_by_country" do
-    it "can receive a country and return recipe results" do
+    it "can receive a country and return recipe results", :vcr do
       country = "thailand"
       search = RecipeService.new.get_recipes_by_country(country)
       expect(search).to have_key(:hits)

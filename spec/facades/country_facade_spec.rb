@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CountryFacade do
   describe "countries" do
-    it "gets all countries as objects" do
+    it "gets all countries as objects", :vcr do
       countries_list = CountryFacade.new.countries
 
       expect(countries_list).to be_an Array

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Learning Resources" do
-  describe "Fetch Learning Resource" do
+  describe "GET api_v1_learning_resources_path" do
     describe "happy paths" do
-      it "returns the information for a given country" do
+      it "returns the information for a given country", :vcr do
         get api_v1_learning_resources_path(country: 'laos')
 
         expect(response).to be_successful
@@ -53,11 +53,25 @@ RSpec.describe "Learning Resources" do
       end
     end
 
-    describe "edge cases" do
+    describe "sad paths" do
       it "returns empty objects if no images or video is found", :vcr do
-        get api_v1_learning_resources_path(country: 'Saint Bartholemew')
+        get api_v1_learning_resources_path(country: 'dsadasfwe')
 
         expect(response).to be_successful
+        
+        resource = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(resource).to have_key(:data)
+        expect(resource[:data]).to be_a Hash
+
+        expect(resource[:data]).to have_key(:attributes)
+        expect(resource[:data][:attributes]).to be_a Hash
+
+        expect(resource[:data][:attributes]).to have_key(:video)
+        expect(resource[:data][:attributes][:video]).to eq({})
+
+        expect(resource[:data][:attributes]).to have_key(:images)
+        expect(resource[:data][:attributes][:images]).to eq([])
       end
     end
   end
