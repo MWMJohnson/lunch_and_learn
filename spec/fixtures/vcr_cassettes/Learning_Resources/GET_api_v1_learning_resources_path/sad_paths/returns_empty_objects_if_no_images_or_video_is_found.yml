@@ -1,0 +1,129 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/search?channelId=UCluQ5yInbeAkkeCndNnUhpw&key=AIzaSyAb9BlUnVrrTnZR-o528B6n-ApbAp2oWPI&part=snippet&q=dsadasfwe
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Faraday v2.7.10
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      - Referer
+      - X-Origin
+      Date:
+      - Wed, 09 Aug 2023 15:11:43 GMT
+      Server:
+      - scaffolding on HTTPServer2
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "kind": "youtube#searchListResponse",
+          "etag": "UBAOiXjvY0CZ7Ub9tJDO9bUtsU8",
+          "regionCode": "US",
+          "pageInfo": {
+            "totalResults": 0,
+            "resultsPerPage": 0
+          },
+          "items": []
+        }
+  recorded_at: Wed, 09 Aug 2023 15:11:43 GMT
+- request:
+    method: get
+    uri: https://api.pexels.com/v1/search?query=dsadasfwe
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - eRLw1OovRKpOiw94zz16yfxD5bKAEQkonVmtModwb5oJKs0UcrzYJM13
+      User-Agent:
+      - Faraday v2.7.10
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 09 Aug 2023 15:11:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cf-Ray:
+      - 7f40eeecad401f25-DEN
+      Cf-Cache-Status:
+      - HIT
+      Access-Control-Allow-Origin:
+      - "*"
+      Age:
+      - '1977'
+      Cache-Control:
+      - max-age=86400
+      Etag:
+      - W/"5188ac46f9d89b65c048e79e02f554ce"
+      Expires:
+      - Thu, 10 Aug 2023 15:11:44 GMT
+      Access-Control-Allow-Headers:
+      - Accept, Content-Type, Content-Length, Accept-Encoding, Authorization, User-Agent
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Ratelimit-Limit:
+      - '25000'
+      X-Ratelimit-Remaining:
+      - '24835'
+      X-Ratelimit-Reset:
+      - '1694008860'
+      X-Request-Id:
+      - 571d5a63-1853-4812-8913-1aa1ada63ba5
+      X-Runtime:
+      - '0.030641'
+      X-Server:
+      - chameleon
+      Set-Cookie:
+      - __cf_bm=LIkEhkNbDu_PLQCTsbPEcVzzgjVAtpNz5IkiYKKWaBQ-1691593904-0-AaGQF5kS0TBoAHw+5uuuSmQVVWtd0Gh31qgCxOiiJWINrGDlMSi0RZ+DpcBITBbxKwq0f/5VLBaCyGwADspEock=;
+        path=/; expires=Wed, 09-Aug-23 15:41:44 GMT; domain=.pexels.com; HttpOnly;
+        Secure; SameSite=None
+      Vary:
+      - Accept-Encoding
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"page":1,"per_page":15,"photos":[],"total_results":0}'
+  recorded_at: Wed, 09 Aug 2023 15:11:44 GMT
+recorded_with: VCR 6.2.0

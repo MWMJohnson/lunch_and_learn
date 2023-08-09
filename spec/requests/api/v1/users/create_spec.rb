@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Register User' do
   describe 'POST api_v1_users_path' do 
     describe 'happy paths' do 
-      it 'registers a user' do
+      it 'registers a user', :vcr do
         user_params = {
           name: 'Odell',
           email: 'goodboy@ruffruff.com',

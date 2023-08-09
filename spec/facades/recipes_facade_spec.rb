@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe RecipesFacade do
   describe 'Recipe' do
     describe '#search' do
-      it 'can return recipes as objects'do
+      it 'can return recipes as objects', :vcr do
         country = {country: 'thailand'}
 
         recipes = RecipesFacade.new(country).search
@@ -20,7 +20,7 @@ RSpec.describe RecipesFacade do
         end
       end
 
-      it 'can return an empty array if no hits'do
+      it 'can return an empty array if no hits', :vcr do
         country = {country: ' '}
 
         recipes = RecipesFacade.new(country).search

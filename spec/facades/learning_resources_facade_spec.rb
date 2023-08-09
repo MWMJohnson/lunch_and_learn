@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe LearningResourcesFacade do
   describe "Learning Resource" do
     describe "get_learning_resources" do
-      it "returns a learning resource for a given country" do
+      it "returns a learning resource for a given country", :vcr do
         country = {country: 'france'}
 
         learning_resource = LearningResourcesFacade.new(country).get_learning_resources

@@ -9,8 +9,7 @@ class RecipesFacade
     if @country
       recipe_search(@country)
     else
-      random_country_recipes
-      random_country = @country[:name][:common]
+      random_country = random_country_recipes[:name][:common]
       recipe_search(random_country)
     end
   end

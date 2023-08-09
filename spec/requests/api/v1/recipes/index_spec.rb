@@ -4,7 +4,7 @@ RSpec.describe 'Recipes' do
   describe 'GET api_v1_recipes_path' do 
     describe "By Search" do
       describe "happy paths" do
-        it "can get recipes by search" do
+        it "can get recipes by search", :vcr do
           get api_v1_recipes_path(country: 'thailand')
 
           expect(response).to be_successful
@@ -47,7 +47,9 @@ RSpec.describe 'Recipes' do
           expect(result[:image].first(100)).to eq("https://edamam-product-images.s3.amazonaws.com/web-img/611/61165abc1c1c6a185fe5e67167d3e1f0.jpg?X-Am")
         end
 
-        it "returns a random countries recipes if no country is given" do
+        it "returns a random countries recipes if no country is given", :vcr do
+          allow_any_instance_of(RecipesFacade).to receive(:random_country_recipes).and_return({name: {common:"laos"}})
+
           get api_v1_recipes_path
 
           expect(response).to be_successful
@@ -84,7 +86,7 @@ RSpec.describe 'Recipes' do
         end
 
         describe 'sad paths' do
-          it "return an empty array if no results found for country or empty string given" do
+          it "return an empty array if no results found for country or empty string given", :vcr do
             get api_v1_recipes_path(country: 'fdsfdsfd')
 
             expect(response).to be_successful
